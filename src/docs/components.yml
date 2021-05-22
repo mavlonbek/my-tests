@@ -19,6 +19,21 @@ components:
         name: fake name
         role: user
 
+    TestCategory:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        codeName:
+          type: string
+          enum: [dtm, avto, teacher]
+      example:
+        id: 6ebac534954b54139806c112
+        name: te name
+        codeName: teacher
+
     Token:
       type: object
       properties:
@@ -48,6 +63,16 @@ components:
           type: string
 
   responses:
+    ConflictName:
+      description: Name already taken
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 409
+            message: Name already taken
+
     DuplicateEmail:
       description: Email already taken
       content:
@@ -57,6 +82,7 @@ components:
           example:
             code: 400
             message: Email already taken
+
     Unauthorized:
       description: Unauthorized
       content:
@@ -66,6 +92,7 @@ components:
           example:
             code: 401
             message: Please authenticate
+
     Forbidden:
       description: Forbidden
       content:
